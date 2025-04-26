@@ -78,7 +78,7 @@ class fmbox():
     except IOError:
       raise NoSuchMailboxError(path)
     self._mbox_position = self._file.tell()
-    self._last_from_line = self._file.readline().replace(linesep, b'')
+    self._last_from_line = self._file.readline(5_000_000).replace(linesep, b'')
 
   def __iter__(self):
     return self
