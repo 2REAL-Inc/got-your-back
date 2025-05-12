@@ -785,7 +785,9 @@ def _backoff(n, retries, reason):
     if n > 3:
       sys.stderr.write('attempt %s/%s\n' % (n+1, retries))
 
-def callGAPI(service, function, soft_errors=False, throw_reasons=[], retry_reasons=[], **kwargs):
+def callGAPI(service, function, soft_errors=False, throw_reasons=None, retry_reasons=None, **kwargs):
+  throw_reasons = [] if throw_reasons is None else throw_reasons
+  retry_reasons = [] if retry_reasons is None else retry_reasons
   retries = 10
   parameters = kwargs.copy()
   parameters.update(extra_args)
