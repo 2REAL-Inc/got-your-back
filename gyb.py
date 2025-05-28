@@ -19,8 +19,6 @@ backup and restore their Gmail.
 
 For more information, see https://git.io/gyb/
 """
-
-global __name__, __author__, __email__, __version__, __license__
 __program_name__ = 'Got Your Back: Gmail Backup'
 __author__ = 'Jay Lee'
 __email__ = 'jay0lee@gmail.com'
@@ -29,8 +27,6 @@ __license__ = 'Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)'
 __website__ = 'jaylee.us/gyb'
 __db_schema_version__ = '6'
 __db_schema_min_version__ = '6'        #Minimum for restore
-
-global extra_args, options, allLabelIds, allLabels, gmail, reserved_labels, thread_msgid_map
 extra_args = {'prettyPrint': False}
 allLabelIds = dict()
 allLabels = dict()
