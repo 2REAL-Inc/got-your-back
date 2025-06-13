@@ -28,7 +28,7 @@ class fmsg():
       else:
         search_line = line
       if check_folded_header:
-        if line.startswith(b' ') or line.startswith(b'\t'):
+        if line.startswith((b' ', b'\t')):
           header_value += line.lstrip()
         else:
           return header_value.decode()
