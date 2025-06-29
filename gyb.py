@@ -19,6 +19,7 @@ backup and restore their Gmail.
 
 For more information, see https://git.io/gyb/
 """
+import defusedxml.ElementTree
 
 global __name__, __author__, __email__, __version__, __license__
 __program_name__ = 'Got Your Back: Gmail Backup'
@@ -76,7 +77,6 @@ import string
 from itertools import islice, chain
 import base64
 import json
-import xml.etree.ElementTree as etree
 from urllib.parse import urlencode
 import configparser
 import webbrowser
@@ -2472,7 +2472,7 @@ def main(argv):
           print("\nReading Vault labels from %s file %s" % (humansize(file_path), file_path))
           print("large files may take some time to read...")
           if file_suffix == '.xml':
-              for _, elem in etree.iterparse(file_path, events=('end',)):
+              for _, elem in defusedxml.ElementTree.iterparse(file_path, events=('end',)):
                   if elem.tag == 'Document':
                       labels = ''
                       fileid = None
