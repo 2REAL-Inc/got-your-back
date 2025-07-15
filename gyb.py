@@ -19,6 +19,7 @@ backup and restore their Gmail.
 
 For more information, see https://git.io/gyb/
 """
+import secrets
 
 global __name__, __author__, __email__, __version__, __license__
 __program_name__ = 'Got Your Back: Gmail Backup'
@@ -58,7 +59,6 @@ import wsgiref.simple_server
 import wsgiref.util
 import time
 import calendar
-import random
 import struct
 import platform
 import datetime
@@ -776,7 +776,7 @@ def buildGAPIServiceObject(api, soft_errors=False):
 
 def _backoff(n, retries, reason):
     wait_on_fail = (2 ** n) if (2 ** n) < 60 else 60
-    randomness = float(random.randint(1,1000)) / 1000
+    randomness = float(secrets.SystemRandom().randint(1,1000)) / 1000
     wait_on_fail += randomness
     if n > 3:
         sys.stderr.write('\nTemp error %s. Backing off %s seconds...'
@@ -1294,7 +1294,7 @@ def doCreateProject():
   crm, httpc = getCRMService(login_hint)
   project_id = 'gyb-project'
   for i in range(3):
-    project_id += '-%s' % ''.join(random.choice(string.digits + string.ascii_lowercase) for i in range(3))
+    project_id += '-%s' % ''.join(secrets.choice(string.digits + string.ascii_lowercase) for i in range(3))
   project_name = 'project:%s' % project_id
   body = {'projectId': project_id, 'name': 'Got Your Back Project'}
   while True:
